@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Skill;
+use Illuminate\Http\Request;
+use App\Http\Resources\SkillResource;
+use Illuminate\Support\Facades\Redirect;
 
 class SkillController extends Controller
 {
@@ -14,7 +17,8 @@ class SkillController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Skills/Index');
+        $skills = SkillResource::collection(Skill::all());
+        return Inertia::render('Skills/Index', compact('skills'));
     }
 
     /**
@@ -24,7 +28,7 @@ class SkillController extends Controller
      */
     public function create()
     {
-        return "create";
+        return Inertia::render('Skills/Create');
     }
 
     /**
@@ -35,18 +39,21 @@ class SkillController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'name' => ['required', 'min:3'],
+            'image' => ['required', 'image']
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        if($request->hasFile('image')) {
+            $image = $request->file('image')->store('skills');
+            Skill::create([
+                'name' => $request->name,
+                'image' => $image
+            ]);
+
+            return Redirect::route('skills.index');
+        }
+        return Redirect::back();
     }
 
     /**
@@ -55,9 +62,9 @@ class SkillController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Skill $skill)
     {
-        //
+        return Inertia::render('Skills/Edit', compact('skill'));
     }
 
     /**
@@ -67,9 +74,12 @@ class SkillController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Skill $skill)
     {
-        //
+        $image = $skill->image;
+        $request->validate([
+            'name' => ['required', 'min:3']
+        ]);
     }
 
     /**
