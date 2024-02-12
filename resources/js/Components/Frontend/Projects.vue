@@ -1,6 +1,20 @@
 <script setup>
 import Project from "./Project.vue";
-defineProps({ skills: Object, projects: Object });
+import { ref } from "vue";
+const props = defineProps({ skills: Object, projects: Object });
+const filteredProjects = ref(props.projects.data);
+const selectedSkill = ref("all");
+const filterProjects = (id) => {
+    if (id === "all") {
+        filteredProjects.value = props.projects.data;
+        selectedSkill.value = id;
+    } else {
+        filteredProjects.value = props.projects.data.filter((project) => {
+            return project.skill.id === id;
+        });
+        selectedSkill.value = id;
+    }
+};
 </script>
 <template>
     <div class="container mx-auto">
@@ -10,7 +24,13 @@ defineProps({ skills: Object, projects: Object });
             <ul class="flex flex-col lg:flex-row justify-evenly items-center">
                 <li class="cursor-pointer capitalize m-4">
                     <button
+                        @click="filterProjects('all')"
                         class="flex text-center px-4 py-2 hover:text-light-tail-500 dark:text-dark-navy-100"
+                        :class="[
+                            selectedSkill === 'all'
+                                ? 'text-light-tail-500 dark:text-dark-navy-100'
+                                : '',
+                        ]"
                     >
                         All
                     </button>
@@ -21,7 +41,9 @@ defineProps({ skills: Object, projects: Object });
                     :key="projectSkill.id"
                 >
                     <button
+                        @click="filterProjects(projectSkill.id)"
                         class="flex text-center px-4 py-2 hover:text-light-tail-500 dark:text-dark-navy-100"
+                        :class="[selectedSkill == projectSkill.id ? '' : '']"
                     >
                         {{ projectSkill.name }}
                     </button>
@@ -30,7 +52,7 @@ defineProps({ skills: Object, projects: Object });
         </nav>
         <section class="grid gap-y-12 lg:grid-cols-3 lg:gap-8">
             <Project
-                v-for="project in projects.data"
+                v-for="project in filteredProjects"
                 :key="project.id"
                 :project="project"
             />
