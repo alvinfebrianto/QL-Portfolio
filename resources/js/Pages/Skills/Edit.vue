@@ -23,7 +23,7 @@
                         />
                         <BreezeInputError
                             class="mt-2"
-                            :message="form.errors.name"
+                            :message="$page.props.errors.name"
                         />
                     </div>
                     <div class="mt-2">
@@ -36,7 +36,7 @@
                         />
                         <BreezeInputError
                             class="mt-2"
-                            :message="form.errors.image"
+                            :message="$page.props.errors.image"
                         />
                     </div>
                     <div class="flex items-center justify-end mt-4">
@@ -45,7 +45,7 @@
                             :class="{ 'opacity-25': form.processing }"
                             :disabled="form.processing"
                         >
-                            Store
+                            Update
                         </BreezeButton>
                     </div>
                 </form>

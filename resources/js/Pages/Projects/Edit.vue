@@ -1,9 +1,9 @@
 <template>
-    <Head title="New Project" />
+    <Head title="Edit Project" />
     <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                New Project
+                Edit Project
             </h2>
         </template>
 
@@ -16,7 +16,6 @@
                             v-model="form.skill_id"
                             id="skill_id"
                             name="skill_id"
-                            required
                             class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
                         >
                             <option
@@ -26,11 +25,11 @@
                             >
                                 {{ skill.name }}
                             </option>
+                            <BreezeInputError
+                                class="mt-2"
+                                :message="$page.props.errors.skill_id"
+                            />
                         </select>
-                        <BreezeInputError
-                            class="mt-2"
-                            :message="form.errors.skill_id"
-                        />
                     </div>
                     <div>
                         <BreezeLabel for="name" value="Name" />
@@ -38,13 +37,12 @@
                             id="name"
                             type="text"
                             class="mt-1 block w-full"
-                            required
                             v-model="form.name"
                             autocomplete="name"
                         />
                         <BreezeInputError
                             class="mt-2"
-                            :message="form.errors.name"
+                            :message="$page.props.errors.name"
                         />
                     </div>
                     <div>
@@ -58,7 +56,7 @@
                         />
                         <BreezeInputError
                             class="mt-2"
-                            :message="form.errors.project_url"
+                            :message="$page.props.errors.project_url"
                         />
                     </div>
                     <div class="mt-2">
@@ -71,17 +69,11 @@
                         />
                         <BreezeInputError
                             class="mt-2"
-                            :message="form.errors.image"
+                            :message="$page.props.errors.image"
                         />
                     </div>
                     <div class="flex items-center justify-end mt-4">
-                        <BreezeButton
-                            class="ml-4"
-                            :class="{ 'opacity-25': form.processing }"
-                            :disabled="form.processing"
-                        >
-                            Store
-                        </BreezeButton>
+                        <BreezeButton class="ml-4"> Update </BreezeButton>
                     </div>
                 </form>
             </div>
@@ -96,17 +88,24 @@ import BreezeButton from "@/Components/Button.vue";
 import BreezeInput from "@/Components/Input.vue";
 import BreezeInputError from "@/Components/InputError.vue";
 import BreezeLabel from "@/Components/Label.vue";
+import { Inertia } from "@inertiajs/inertia";
 
-defineProps({ skills: Array });
+const props = defineProps({ skills: Array, project: Object });
 
 const form = useForm({
-    name: "",
+    name: props.project?.name,
     image: null,
-    skill_id: "",
-    project_url: "",
+    skill_id: props.project?.skill_id,
+    project_url: props.project?.project_url,
 });
 
 const submit = () => {
-    form.post(route("projects.store"));
+    Inertia.post(`/projects/${props.project.id}`, {
+        _method: "put",
+        name: form.name,
+        image: form.image,
+        skill_id: form.skill_id,
+        project_url: form.project_url,
+    });
 };
 </script>
