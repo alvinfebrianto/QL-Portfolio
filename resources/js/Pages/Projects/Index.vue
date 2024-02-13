@@ -1,5 +1,5 @@
 <template>
-    <Head title="Skills Index" />
+    <Head title="Projects Index" />
     <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">

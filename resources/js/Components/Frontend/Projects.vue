@@ -43,7 +43,11 @@ const filterProjects = (id) => {
                     <button
                         @click="filterProjects(projectSkill.id)"
                         class="flex text-center px-4 py-2 hover:text-light-tail-500 dark:text-dark-navy-100"
-                        :class="[selectedSkill == projectSkill.id ? '' : '']"
+                        :class="[
+                            selectedSkill == projectSkill.id
+                                ? 'text-light-tail-500 dark:text-dark-navy-100'
+                                : '',
+                        ]"
                     >
                         {{ projectSkill.name }}
                     </button>

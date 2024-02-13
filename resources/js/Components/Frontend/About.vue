@@ -22,14 +22,13 @@
                         <p class="mb-4 text-accent">Frontend Web Developer</p>
                         <hr class="mb-8 opacity-90 dark:opacity-5" />
                         <p class="mb-8">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Sint laudantium nam tempore facere incidunt
-                            deleniti, dolore corporis exercitationem in culpa
-                            consectetur ut asperiores consequuntur debitis quae
-                            necessitatibus.<br />
-                            <br />
-                            Lorem ipsum, dolor sit amet consectetur adipisicing
-                            elit. Dolores amet unde veniam dignissimos tempora.
+                            Saya memiliki keahlian dalam bidang pengembangan web
+                            dengan pemahaman yang kuat dalam bahasa pemrograman
+                            HTML, CSS, JavaScript, dan PHP serta pengalaman
+                            praktis dalam mengimplementasikan teknologi tersebut
+                            untuk memecahkan masalah dunia nyata. Selama studi,
+                            saya biasa mengerjakan bagian coding di dalam tim
+                            saat pengerjaan sebuah proyek.<br />
                         </p>
                     </div>
                     <a

@@ -19,8 +19,10 @@
                     <p
                         class="pt-4 pb-8 md:pt-6 md:pb-12 max-w-[480px] text-lg text-center lg:text-left"
                     >
-                        Lorem ipsum dolor sit amet consectetur, adipisicing
-                        elit.
+                        Saya adalah mahasiswa di program studi D4 Manajemen
+                        Informatika dengan ketertarikan yang kuat pada bidang
+                        Frontend & Backend Web Developer, UI/UX Design, dan
+                        Digital Marketing.
                     </p>
                     <button
                         class="btn btn-md bg-accent hover:bg-light-secondary hover:text-light-tail-500 dark:hover:bg-dark-secondary dark:hover:text-dark-navy-100 md:btn-lg transition-all"
